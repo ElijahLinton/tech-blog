@@ -1,4 +1,7 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line new-cap
 const router = require('express').Router();
 const {User, Post, Comment} = require('../models');
 const sequelize = require('../config/connection');
@@ -29,5 +32,28 @@ router.get('/post/:id', (req, res) =>{
     const onePost = postData.get({plain: true});
 
     res.render('one-post', {onePost});
+  } else {
+    res.status(404).end();
   }
+}).catch((err) => {
+  res.status(500).json(err);
 });
+
+
+router.get('/login', (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect('/login');
+    return;
+  }
+  res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
+
+module.exports = router;
