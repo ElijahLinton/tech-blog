@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 const router = require('express').Router();
 const {Post} = require('../models/');
-const withAuth = require('../utilis/auth');
+const withAuth = require('../utils/auth');
 
 
 router.get('/', withAuth, (req, res) => {
@@ -14,3 +14,5 @@ router.get('/', withAuth, (req, res) => {
     res.render('dashboard', {posts, loggedIn: true});
   });
 });
+
+module.exports = router;

@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
-router = require('express').Router();
+const router = require('express').Router();
 const {Comment} = require('../../models');
-const withAuth = require('../../utilis/auth');
+const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, (req, res) =>{
   if (req.session) {
@@ -17,7 +17,7 @@ router.post('/', withAuth, (req, res) =>{
   }
 });
 
-route.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   Comment.destroy({
     where: {
       id: req.params.id,

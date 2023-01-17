@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
 /* eslint-disable linebreak-style */
-const { Model, DataTypes } = require('sequelize');
+const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 
@@ -15,11 +16,11 @@ User.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   username: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
@@ -32,8 +33,8 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: [10]
-    }
+      len: [10],
+    },
   },
 
 },
@@ -47,14 +48,14 @@ User.init({
       updatedUserData.password = await bcrypt
         .hash(updatedUserData.password, 10);
       return updatedUserData;
-    }
+    },
   },
   sequelize,
   timestamps: false,
   freezeTableName: true,
   underscored: true,
-  modelName: 'user'
-})
+  modelName: 'user',
+});
 
 
 module.exports = User;

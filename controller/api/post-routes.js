@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 const router = require('express').Router();
-const withAuth = require('../../utilis/auth');
+const withAuth = require('../../utils/auth');
 const {Post, Comment, User} = require('../../models');
 router.post('/', withAuth, (req, res) => {
   Post.create({

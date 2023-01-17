@@ -1,13 +1,34 @@
 /* eslint-disable linebreak-style */
-const {Model, Datatypes} = require('sequelize');
+/* eslint-disable require-jsdoc */
+/* eslint-disable linebreak-style */
+const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Post extends Model {}
 
 Post.init(
   {
-    title: Datatypes.STRING,
-    body: Datatypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    feed: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
@@ -15,4 +36,4 @@ Post.init(
 
 );
 
-module.exports = Post
+module.exports = Post;

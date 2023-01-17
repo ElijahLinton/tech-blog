@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/post/:id', (req, res) =>{
+router.get('/post/:id', (req, res) => {
   Post.findByPk(req.params.id, {
     include: [
       {
@@ -26,19 +26,18 @@ router.get('/post/:id', (req, res) =>{
         include: [User],
       },
     ],
+  }).then((postData) => {
+    if (postData) {
+      const onePost = postData.get({plain: true});
+
+      res.render('one-post', {onePost});
+    } else {
+      res.status(404).end();
+    }
+  }).catch((err) => {
+    res.status(500).json(err);
   });
-}).then((postData) => {
-  if (postData) {
-    const onePost = postData.get({plain: true});
-
-    res.render('one-post', {onePost});
-  } else {
-    res.status(404).end();
-  }
-}).catch((err) => {
-  res.status(500).json(err);
 });
-
 
 router.get('/login', (req, res) => {
   if (req.session.loggedin) {
